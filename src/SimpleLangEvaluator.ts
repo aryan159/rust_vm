@@ -76,6 +76,8 @@ export class SimpleLangEvaluator extends BasicEvaluator {
             
             // Parse the input
             const tree = parser.prog();
+
+            console.log(tree)
             
             // Evaluate the parsed tree
             const result = this.visitor.visit(tree);
