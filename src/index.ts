@@ -1,11 +1,9 @@
 import { initialise } from "conductor/dist/conductor/runner/util/";
-import { SimpleLangEvaluator } from "./SimpleLangEvaluator";
+import { RustEvaluator } from "./RustEvaluator";
 
-const {runnerPlugin, conduit} = initialise(SimpleLangEvaluator);
+const {runnerPlugin, conduit} = initialise(RustEvaluator);
 
-console.log("hello world")
-
-const program = "2 + (3 * 4)";
+console.log("hello world from index.ts")
 // conduit(program).then(result => {
 //   console.log("Result:", result);
 // }).catch(err => {
