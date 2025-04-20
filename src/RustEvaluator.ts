@@ -14,12 +14,18 @@ class RustEvaluatorVisitor extends AbstractParseTreeVisitor<number> implements S
             this.visitFunction(function_);
         }
 
-        return 43;
+        return 97;
     }
 
     visitFunction(ctx: FunctionContext) : number {
         console.log('[visitFunction]')
         console.log(ctx)
+
+        console.log(ctx.parameter_list().parameter());
+
+        for (var param of ctx.parameter_list().parameter()) {
+            console.log(param.IDENTIFIER().getText());
+        }
         
         return 42;
     }
