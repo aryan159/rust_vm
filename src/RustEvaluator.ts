@@ -2,7 +2,7 @@ import { BasicEvaluator } from "conductor/dist/conductor/runner";
 import { IRunnerPlugin } from "conductor/dist/conductor/runner/types";
 import { CharStream, CommonTokenStream, AbstractParseTreeVisitor } from 'antlr4ng';
 import { SimpleRustLexer } from './parser/src/SimpleRustLexer';
-import { StatementContext, SimpleRustParser, ProgramContext, FunctionContext } from './parser/src/SimpleRustParser';
+import { StatementContext, SimpleRustParser, ProgramContext, FunctionContext, ExpressionContext } from './parser/src/SimpleRustParser';
 import { SimpleRustVisitor } from './parser/src/SimpleRustVisitor';
 
 class RustEvaluatorVisitor extends AbstractParseTreeVisitor<number> implements SimpleRustVisitor<number> {
@@ -26,44 +26,44 @@ class RustEvaluatorVisitor extends AbstractParseTreeVisitor<number> implements S
 
 
     // Visit a parse tree produced by SimpleLangParser#statement
-    // visitStatement(ctx: StatementContext): number {
-    //     console.log("hi aryan")
-    //     console.log(ctx)
-    //     return 42;
-    // }
+    visitStatement(ctx: StatementContext): number {
+        console.log("[visitStatement]")
+        console.log(ctx)
+        return 42;
+    }
 
     // Visit a parse tree produced by SimpleLangParser#expression
-    // visitExpression(ctx: ExpressionContext): number {
-    //     if (ctx.getChildCount() === 1) {
-    //         // INT case
-    //         return parseInt(ctx.getText());
-    //     } else if (ctx.getChildCount() === 3) {
-    //         if (ctx.getChild(0).getText() === '(' && ctx.getChild(2).getText() === ')') {
-    //             // Parenthesized expression
-    //             return this.visit(ctx.getChild(1) as ExpressionContext);
-    //         } else {
-    //             // Binary operation
-    //             const left = this.visit(ctx.getChild(0) as ExpressionContext);
-    //             const op = ctx.getChild(1).getText();
-    //             const right = this.visit(ctx.getChild(2) as ExpressionContext);
+    visitExpression(ctx: ExpressionContext): number {
+        if (ctx.getChildCount() === 1) {
+            // INT case
+            return parseInt(ctx.getText());
+        } else if (ctx.getChildCount() === 3) {
+            if (ctx.getChild(0).getText() === '(' && ctx.getChild(2).getText() === ')') {
+                // Parenthesized expression
+                return this.visit(ctx.getChild(1) as ExpressionContext);
+            } else {
+                // Binary operation
+                const left = this.visit(ctx.getChild(0) as ExpressionContext);
+                const op = ctx.getChild(1).getText();
+                const right = this.visit(ctx.getChild(2) as ExpressionContext);
 
-    //             switch (op) {
-    //                 case '+': return left + right;
-    //                 case '-': return left - right;
-    //                 case '*': return left * right;
-    //                 case '/':
-    //                     if (right === 0) {
-    //                         throw new Error("Division by zero");
-    //                     }
-    //                     return left / right;
-    //                 default:
-    //                     throw new Error(`Unknown operator: ${op}`);
-    //             }
-    //         }
-    //     }
+                switch (op) {
+                    case '+': return left + right;
+                    case '-': return left - right;
+                    case '*': return left * right;
+                    case '/':
+                        if (right === 0) {
+                            throw new Error("Division by zero");
+                        }
+                        return left / right;
+                    default:
+                        throw new Error(`Unknown operator: ${op}`);
+                }
+            }
+        }
         
-    //     throw new Error(`Invalid expression: ${ctx.getText()}`);
-    // }
+        throw new Error(`Invalid expression: ${ctx.getText()}`);
+    }
 
     // Override the default result method from AbstractParseTreeVisitor
     protected defaultResult(): number {
