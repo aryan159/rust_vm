@@ -368,7 +368,14 @@ class RustEvaluatorVisitor
         }
         let vector = vector_variable.maybe_vector;
         // @ts-ignore
-        vector.elements.push(expr_value.reference);
+        let ref: Reference = expr_value.reference;
+        // @ts-ignore
+        vector.elements.push(ref);
+        if (ref.is_mut) {
+          ref.variable.mut_refs += 1;
+        } else {
+          ref.variable.immut_refs += 1;
+        }
       }
     } else if (ctx.getChildCount() == 4) {
       if (ctx.getChild(0).getText() == "vec!") {
@@ -531,6 +538,11 @@ class RustEvaluatorVisitor
     } else if (ctx.getChildCount() == 1) {
       if (ctx.IDENTIFIER()) {
         let orig_var = get_variable(envs, ctx.IDENTIFIER().getText());
+        if (orig_var.immut_refs + orig_var.mut_refs > 0) {
+          throw new Error(
+            "Can not move variable that has existing references to it"
+          );
+        }
         return { type: "move_ownership", orig_var };
       } else if (ctx.NUMBER()) {
         return { type: "number", val: parseInt(ctx.NUMBER().getText(), 10) };
