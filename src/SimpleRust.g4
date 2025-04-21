@@ -41,6 +41,7 @@ type
 statement
     : variable_declaration
     | expression_statement
+    | block
     ;
 
 variable_declaration

@@ -185,7 +185,7 @@ export class SimpleRustParser extends antlr.Parser {
             this.state = 45;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
-            while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4044096004) !== 0)) {
+            while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 4044096036) !== 0)) {
                 {
                 {
                 this.state = 42;
@@ -436,7 +436,7 @@ export class SimpleRustParser extends antlr.Parser {
         let localContext = new StatementContext(this.context, this.state);
         this.enterRule(localContext, 14, SimpleRustParser.RULE_statement);
         try {
-            this.state = 95;
+            this.state = 96;
             this.errorHandler.sync(this);
             switch (this.tokenStream.LA(1)) {
             case SimpleRustParser.T__18:
@@ -458,6 +458,13 @@ export class SimpleRustParser extends antlr.Parser {
                 {
                 this.state = 94;
                 this.expression_statement();
+                }
+                break;
+            case SimpleRustParser.T__4:
+                this.enterOuterAlt(localContext, 3);
+                {
+                this.state = 95;
+                this.block();
                 }
                 break;
             default:
@@ -484,29 +491,29 @@ export class SimpleRustParser extends antlr.Parser {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 97;
+            this.state = 98;
             this.match(SimpleRustParser.T__18);
-            this.state = 99;
+            this.state = 100;
             this.errorHandler.sync(this);
             _la = this.tokenStream.LA(1);
             if (_la === 10) {
                 {
-                this.state = 98;
+                this.state = 99;
                 this.match(SimpleRustParser.T__9);
                 }
             }
 
-            this.state = 101;
-            this.match(SimpleRustParser.IDENTIFIER);
             this.state = 102;
-            this.match(SimpleRustParser.T__7);
+            this.match(SimpleRustParser.IDENTIFIER);
             this.state = 103;
-            this.type_();
+            this.match(SimpleRustParser.T__7);
             this.state = 104;
-            this.match(SimpleRustParser.T__19);
+            this.type_();
             this.state = 105;
-            this.expression(0);
+            this.match(SimpleRustParser.T__19);
             this.state = 106;
+            this.expression(0);
+            this.state = 107;
             this.match(SimpleRustParser.T__20);
             }
         }
@@ -529,9 +536,9 @@ export class SimpleRustParser extends antlr.Parser {
         try {
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 108;
-            this.expression(0);
             this.state = 109;
+            this.expression(0);
+            this.state = 110;
             this.match(SimpleRustParser.T__20);
             }
         }
@@ -567,110 +574,110 @@ export class SimpleRustParser extends antlr.Parser {
             let alternative: number;
             this.enterOuterAlt(localContext, 1);
             {
-            this.state = 143;
+            this.state = 144;
             this.errorHandler.sync(this);
             switch (this.interpreter.adaptivePredict(this.tokenStream, 11, this.context) ) {
             case 1:
                 {
-                this.state = 112;
+                this.state = 113;
                 this.match(SimpleRustParser.IDENTIFIER);
                 }
                 break;
             case 2:
                 {
-                this.state = 113;
+                this.state = 114;
                 this.match(SimpleRustParser.NUMBER);
                 }
                 break;
             case 3:
                 {
-                this.state = 114;
+                this.state = 115;
                 this.match(SimpleRustParser.STRING);
                 }
                 break;
             case 4:
                 {
-                this.state = 115;
+                this.state = 116;
                 this.match(SimpleRustParser.BOOLEAN);
                 }
                 break;
             case 5:
                 {
-                this.state = 116;
-                this.match(SimpleRustParser.T__1);
                 this.state = 117;
-                this.expression(0);
+                this.match(SimpleRustParser.T__1);
                 this.state = 118;
+                this.expression(0);
+                this.state = 119;
                 this.match(SimpleRustParser.T__2);
                 }
                 break;
             case 6:
                 {
-                this.state = 120;
-                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 121;
-                this.match(SimpleRustParser.T__19);
+                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 122;
+                this.match(SimpleRustParser.T__19);
+                this.state = 123;
                 this.expression(6);
                 }
                 break;
             case 7:
                 {
-                this.state = 123;
-                this.match(SimpleRustParser.T__8);
                 this.state = 124;
+                this.match(SimpleRustParser.T__8);
+                this.state = 125;
                 this.match(SimpleRustParser.IDENTIFIER);
                 }
                 break;
             case 8:
                 {
-                this.state = 125;
-                this.match(SimpleRustParser.T__17);
                 this.state = 126;
+                this.match(SimpleRustParser.T__17);
+                this.state = 127;
                 this.match(SimpleRustParser.IDENTIFIER);
                 }
                 break;
             case 9:
                 {
-                this.state = 127;
-                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 128;
-                this.match(SimpleRustParser.T__1);
+                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 129;
-                this.expression_list();
+                this.match(SimpleRustParser.T__1);
                 this.state = 130;
+                this.expression_list();
+                this.state = 131;
                 this.match(SimpleRustParser.T__2);
                 }
                 break;
             case 10:
                 {
-                this.state = 132;
-                this.match(SimpleRustParser.T__23);
                 this.state = 133;
-                this.match(SimpleRustParser.T__24);
+                this.match(SimpleRustParser.T__23);
                 this.state = 134;
-                this.expression_list();
+                this.match(SimpleRustParser.T__24);
                 this.state = 135;
+                this.expression_list();
+                this.state = 136;
                 this.match(SimpleRustParser.T__25);
                 }
                 break;
             case 11:
                 {
-                this.state = 137;
-                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 138;
-                this.match(SimpleRustParser.T__26);
+                this.match(SimpleRustParser.IDENTIFIER);
                 this.state = 139;
-                this.match(SimpleRustParser.T__1);
+                this.match(SimpleRustParser.T__26);
                 this.state = 140;
-                this.expression(0);
+                this.match(SimpleRustParser.T__1);
                 this.state = 141;
+                this.expression(0);
+                this.state = 142;
                 this.match(SimpleRustParser.T__2);
                 }
                 break;
             }
             this.context!.stop = this.tokenStream.LT(-1);
-            this.state = 150;
+            this.state = 151;
             this.errorHandler.sync(this);
             alternative = this.interpreter.adaptivePredict(this.tokenStream, 12, this.context);
             while (alternative !== 2 && alternative !== antlr.ATN.INVALID_ALT_NUMBER) {
@@ -683,11 +690,11 @@ export class SimpleRustParser extends antlr.Parser {
                     {
                     localContext = new ExpressionContext(parentContext, parentState);
                     this.pushNewRecursionContext(localContext, _startState, SimpleRustParser.RULE_expression);
-                    this.state = 145;
+                    this.state = 146;
                     if (!(this.precpred(this.context, 7))) {
                         throw this.createFailedPredicateException("this.precpred(this.context, 7)");
                     }
-                    this.state = 146;
+                    this.state = 147;
                     _la = this.tokenStream.LA(1);
                     if(!(_la === 22 || _la === 23)) {
                     this.errorHandler.recoverInline(this);
@@ -696,12 +703,12 @@ export class SimpleRustParser extends antlr.Parser {
                         this.errorHandler.reportMatch(this);
                         this.consume();
                     }
-                    this.state = 147;
+                    this.state = 148;
                     this.expression(8);
                     }
                     }
                 }
-                this.state = 152;
+                this.state = 153;
                 this.errorHandler.sync(this);
                 alternative = this.interpreter.adaptivePredict(this.tokenStream, 12, this.context);
             }
@@ -737,59 +744,59 @@ export class SimpleRustParser extends antlr.Parser {
     }
 
     public static readonly _serializedATN: number[] = [
-        4,1,32,154,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,32,155,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,1,0,5,0,24,8,0,10,0,12,0,27,
         9,0,1,0,1,0,1,1,1,1,1,1,1,1,3,1,35,8,1,1,1,1,1,1,1,1,1,1,1,1,2,1,
         2,5,2,44,8,2,10,2,12,2,47,9,2,1,2,1,2,1,3,1,3,1,3,5,3,54,8,3,10,
         3,12,3,57,9,3,1,4,3,4,60,8,4,1,4,1,4,5,4,64,8,4,10,4,12,4,67,9,4,
         1,5,1,5,1,5,3,5,72,8,5,1,5,3,5,75,8,5,1,5,1,5,1,6,1,6,1,6,1,6,1,
-        6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,92,8,6,1,7,1,7,3,7,96,8,7,
-        1,8,1,8,3,8,100,8,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,1,10,
+        6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,92,8,6,1,7,1,7,1,7,3,7,97,
+        8,7,1,8,1,8,3,8,101,8,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,9,1,9,1,9,
         1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
         1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
-        1,10,1,10,1,10,1,10,1,10,3,10,144,8,10,1,10,1,10,1,10,5,10,149,8,
-        10,10,10,12,10,152,9,10,1,10,0,1,20,11,0,2,4,6,8,10,12,14,16,18,
-        20,0,1,1,0,22,23,169,0,25,1,0,0,0,2,30,1,0,0,0,4,41,1,0,0,0,6,50,
-        1,0,0,0,8,59,1,0,0,0,10,68,1,0,0,0,12,91,1,0,0,0,14,95,1,0,0,0,16,
-        97,1,0,0,0,18,108,1,0,0,0,20,143,1,0,0,0,22,24,3,2,1,0,23,22,1,0,
-        0,0,24,27,1,0,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,28,1,0,0,0,27,25,
-        1,0,0,0,28,29,5,0,0,1,29,1,1,0,0,0,30,31,5,1,0,0,31,32,5,28,0,0,
-        32,34,5,2,0,0,33,35,3,6,3,0,34,33,1,0,0,0,34,35,1,0,0,0,35,36,1,
-        0,0,0,36,37,5,3,0,0,37,38,5,4,0,0,38,39,3,12,6,0,39,40,3,4,2,0,40,
-        3,1,0,0,0,41,45,5,5,0,0,42,44,3,14,7,0,43,42,1,0,0,0,44,47,1,0,0,
-        0,45,43,1,0,0,0,45,46,1,0,0,0,46,48,1,0,0,0,47,45,1,0,0,0,48,49,
-        5,6,0,0,49,5,1,0,0,0,50,55,3,10,5,0,51,52,5,7,0,0,52,54,3,10,5,0,
-        53,51,1,0,0,0,54,57,1,0,0,0,55,53,1,0,0,0,55,56,1,0,0,0,56,7,1,0,
-        0,0,57,55,1,0,0,0,58,60,3,20,10,0,59,58,1,0,0,0,59,60,1,0,0,0,60,
-        65,1,0,0,0,61,62,5,7,0,0,62,64,3,20,10,0,63,61,1,0,0,0,64,67,1,0,
-        0,0,65,63,1,0,0,0,65,66,1,0,0,0,66,9,1,0,0,0,67,65,1,0,0,0,68,69,
-        5,28,0,0,69,71,5,8,0,0,70,72,5,9,0,0,71,70,1,0,0,0,71,72,1,0,0,0,
-        72,74,1,0,0,0,73,75,5,10,0,0,74,73,1,0,0,0,74,75,1,0,0,0,75,76,1,
-        0,0,0,76,77,3,12,6,0,77,11,1,0,0,0,78,92,5,11,0,0,79,92,5,12,0,0,
-        80,92,5,13,0,0,81,92,5,14,0,0,82,83,5,15,0,0,83,84,5,16,0,0,84,85,
-        3,12,6,0,85,86,5,17,0,0,86,92,1,0,0,0,87,88,5,9,0,0,88,92,3,12,6,
-        0,89,90,5,18,0,0,90,92,3,12,6,0,91,78,1,0,0,0,91,79,1,0,0,0,91,80,
-        1,0,0,0,91,81,1,0,0,0,91,82,1,0,0,0,91,87,1,0,0,0,91,89,1,0,0,0,
-        92,13,1,0,0,0,93,96,3,16,8,0,94,96,3,18,9,0,95,93,1,0,0,0,95,94,
-        1,0,0,0,96,15,1,0,0,0,97,99,5,19,0,0,98,100,5,10,0,0,99,98,1,0,0,
-        0,99,100,1,0,0,0,100,101,1,0,0,0,101,102,5,28,0,0,102,103,5,8,0,
-        0,103,104,3,12,6,0,104,105,5,20,0,0,105,106,3,20,10,0,106,107,5,
-        21,0,0,107,17,1,0,0,0,108,109,3,20,10,0,109,110,5,21,0,0,110,19,
-        1,0,0,0,111,112,6,10,-1,0,112,144,5,28,0,0,113,144,5,29,0,0,114,
-        144,5,30,0,0,115,144,5,31,0,0,116,117,5,2,0,0,117,118,3,20,10,0,
-        118,119,5,3,0,0,119,144,1,0,0,0,120,121,5,28,0,0,121,122,5,20,0,
-        0,122,144,3,20,10,6,123,124,5,9,0,0,124,144,5,28,0,0,125,126,5,18,
-        0,0,126,144,5,28,0,0,127,128,5,28,0,0,128,129,5,2,0,0,129,130,3,
-        8,4,0,130,131,5,3,0,0,131,144,1,0,0,0,132,133,5,24,0,0,133,134,5,
-        25,0,0,134,135,3,8,4,0,135,136,5,26,0,0,136,144,1,0,0,0,137,138,
-        5,28,0,0,138,139,5,27,0,0,139,140,5,2,0,0,140,141,3,20,10,0,141,
-        142,5,3,0,0,142,144,1,0,0,0,143,111,1,0,0,0,143,113,1,0,0,0,143,
-        114,1,0,0,0,143,115,1,0,0,0,143,116,1,0,0,0,143,120,1,0,0,0,143,
-        123,1,0,0,0,143,125,1,0,0,0,143,127,1,0,0,0,143,132,1,0,0,0,143,
-        137,1,0,0,0,144,150,1,0,0,0,145,146,10,7,0,0,146,147,7,0,0,0,147,
-        149,3,20,10,8,148,145,1,0,0,0,149,152,1,0,0,0,150,148,1,0,0,0,150,
-        151,1,0,0,0,151,21,1,0,0,0,152,150,1,0,0,0,13,25,34,45,55,59,65,
-        71,74,91,95,99,143,150
+        1,10,1,10,1,10,1,10,1,10,1,10,3,10,145,8,10,1,10,1,10,1,10,5,10,
+        150,8,10,10,10,12,10,153,9,10,1,10,0,1,20,11,0,2,4,6,8,10,12,14,
+        16,18,20,0,1,1,0,22,23,171,0,25,1,0,0,0,2,30,1,0,0,0,4,41,1,0,0,
+        0,6,50,1,0,0,0,8,59,1,0,0,0,10,68,1,0,0,0,12,91,1,0,0,0,14,96,1,
+        0,0,0,16,98,1,0,0,0,18,109,1,0,0,0,20,144,1,0,0,0,22,24,3,2,1,0,
+        23,22,1,0,0,0,24,27,1,0,0,0,25,23,1,0,0,0,25,26,1,0,0,0,26,28,1,
+        0,0,0,27,25,1,0,0,0,28,29,5,0,0,1,29,1,1,0,0,0,30,31,5,1,0,0,31,
+        32,5,28,0,0,32,34,5,2,0,0,33,35,3,6,3,0,34,33,1,0,0,0,34,35,1,0,
+        0,0,35,36,1,0,0,0,36,37,5,3,0,0,37,38,5,4,0,0,38,39,3,12,6,0,39,
+        40,3,4,2,0,40,3,1,0,0,0,41,45,5,5,0,0,42,44,3,14,7,0,43,42,1,0,0,
+        0,44,47,1,0,0,0,45,43,1,0,0,0,45,46,1,0,0,0,46,48,1,0,0,0,47,45,
+        1,0,0,0,48,49,5,6,0,0,49,5,1,0,0,0,50,55,3,10,5,0,51,52,5,7,0,0,
+        52,54,3,10,5,0,53,51,1,0,0,0,54,57,1,0,0,0,55,53,1,0,0,0,55,56,1,
+        0,0,0,56,7,1,0,0,0,57,55,1,0,0,0,58,60,3,20,10,0,59,58,1,0,0,0,59,
+        60,1,0,0,0,60,65,1,0,0,0,61,62,5,7,0,0,62,64,3,20,10,0,63,61,1,0,
+        0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,0,66,9,1,0,0,0,67,65,
+        1,0,0,0,68,69,5,28,0,0,69,71,5,8,0,0,70,72,5,9,0,0,71,70,1,0,0,0,
+        71,72,1,0,0,0,72,74,1,0,0,0,73,75,5,10,0,0,74,73,1,0,0,0,74,75,1,
+        0,0,0,75,76,1,0,0,0,76,77,3,12,6,0,77,11,1,0,0,0,78,92,5,11,0,0,
+        79,92,5,12,0,0,80,92,5,13,0,0,81,92,5,14,0,0,82,83,5,15,0,0,83,84,
+        5,16,0,0,84,85,3,12,6,0,85,86,5,17,0,0,86,92,1,0,0,0,87,88,5,9,0,
+        0,88,92,3,12,6,0,89,90,5,18,0,0,90,92,3,12,6,0,91,78,1,0,0,0,91,
+        79,1,0,0,0,91,80,1,0,0,0,91,81,1,0,0,0,91,82,1,0,0,0,91,87,1,0,0,
+        0,91,89,1,0,0,0,92,13,1,0,0,0,93,97,3,16,8,0,94,97,3,18,9,0,95,97,
+        3,4,2,0,96,93,1,0,0,0,96,94,1,0,0,0,96,95,1,0,0,0,97,15,1,0,0,0,
+        98,100,5,19,0,0,99,101,5,10,0,0,100,99,1,0,0,0,100,101,1,0,0,0,101,
+        102,1,0,0,0,102,103,5,28,0,0,103,104,5,8,0,0,104,105,3,12,6,0,105,
+        106,5,20,0,0,106,107,3,20,10,0,107,108,5,21,0,0,108,17,1,0,0,0,109,
+        110,3,20,10,0,110,111,5,21,0,0,111,19,1,0,0,0,112,113,6,10,-1,0,
+        113,145,5,28,0,0,114,145,5,29,0,0,115,145,5,30,0,0,116,145,5,31,
+        0,0,117,118,5,2,0,0,118,119,3,20,10,0,119,120,5,3,0,0,120,145,1,
+        0,0,0,121,122,5,28,0,0,122,123,5,20,0,0,123,145,3,20,10,6,124,125,
+        5,9,0,0,125,145,5,28,0,0,126,127,5,18,0,0,127,145,5,28,0,0,128,129,
+        5,28,0,0,129,130,5,2,0,0,130,131,3,8,4,0,131,132,5,3,0,0,132,145,
+        1,0,0,0,133,134,5,24,0,0,134,135,5,25,0,0,135,136,3,8,4,0,136,137,
+        5,26,0,0,137,145,1,0,0,0,138,139,5,28,0,0,139,140,5,27,0,0,140,141,
+        5,2,0,0,141,142,3,20,10,0,142,143,5,3,0,0,143,145,1,0,0,0,144,112,
+        1,0,0,0,144,114,1,0,0,0,144,115,1,0,0,0,144,116,1,0,0,0,144,117,
+        1,0,0,0,144,121,1,0,0,0,144,124,1,0,0,0,144,126,1,0,0,0,144,128,
+        1,0,0,0,144,133,1,0,0,0,144,138,1,0,0,0,145,151,1,0,0,0,146,147,
+        10,7,0,0,147,148,7,0,0,0,148,150,3,20,10,8,149,146,1,0,0,0,150,153,
+        1,0,0,0,151,149,1,0,0,0,151,152,1,0,0,0,152,21,1,0,0,0,153,151,1,
+        0,0,0,13,25,34,45,55,59,65,71,74,91,96,100,144,151
     ];
 
     private static __ATN: antlr.ATN;
@@ -1069,6 +1076,9 @@ export class StatementContext extends antlr.ParserRuleContext {
     }
     public expression_statement(): Expression_statementContext | null {
         return this.getRuleContext(0, Expression_statementContext);
+    }
+    public block(): BlockContext | null {
+        return this.getRuleContext(0, BlockContext);
     }
     public override get ruleIndex(): number {
         return SimpleRustParser.RULE_statement;

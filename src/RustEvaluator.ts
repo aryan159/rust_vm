@@ -52,7 +52,7 @@ class Reference {
     this.is_mut = is_mut;
     this.name = name;
 
-    add_reference(envs, variable, name, is_mut);
+    add_reference(envs, variable, name, is_mut, this);
   }
 }
 
@@ -143,7 +143,8 @@ function add_reference(
   envs: Env[],
   orig_variable: Variable,
   var_name: string,
-  is_mut: boolean
+  is_mut: boolean,
+  reference: Reference
 ): void {
   if (is_mut && orig_variable.immut_refs > 0) {
     throw new Error(
@@ -161,8 +162,7 @@ function add_reference(
     );
   }
 
-  const new_reference = new Reference(orig_variable, is_mut, var_name);
-  envs[envs.length - 1].refs.push(new_reference);
+  envs[envs.length - 1].refs.push(reference);
 
   if (is_mut) {
     orig_variable.mut_refs += 1;
@@ -235,7 +235,7 @@ class RustEvaluatorVisitor
 
     this.visitBlock(func_main.block);
 
-    return 57;
+    return 62;
   }
 
   visitFunction(ctx: FunctionContext): void {
@@ -283,6 +283,8 @@ class RustEvaluatorVisitor
       return this.visitVariable_declaration(ctx.variable_declaration());
     } else if (ctx.expression_statement()) {
       return this.visitExpression(ctx.expression_statement().expression());
+    } else if (ctx.block()) {
+      return this.visitBlock(ctx.block());
     } else {
       console.log("[ERROR] 1");
     }
@@ -294,6 +296,7 @@ class RustEvaluatorVisitor
     let var_name = ctx.IDENTIFIER().getText();
 
     let expr = this.visitExpression(ctx.expression());
+    console.log("[visitVariable_declaration] expr result: " + expr.toString());
     if (expr.type === "mut_ref" || expr.type === "immut_ref") {
       // empty
     } else if (expr.type == "number") {
@@ -328,6 +331,8 @@ class RustEvaluatorVisitor
       // vec push. must do lifetime check
       let vector_variable = get_variable(envs, ctx.IDENTIFIER().getText());
       let expr_value = this.visitExpression(ctx.expression()[0]);
+      console.log(vector_variable);
+      console.log(expr_value);
       if (["mut_ref", "immut_ref"].includes(expr_value.type)) {
         if (
           !["mut_ref", "immut_ref"].includes(vector_variable.maybe_vector.type)
@@ -339,15 +344,18 @@ class RustEvaluatorVisitor
         let vector_variable_env_pos = envs.findIndex((env) =>
           env.vars.includes(vector_variable)
         );
+        console.log(vector_variable_env_pos);
         // @ts-ignore ive already checked that its a ref type
         let original_owner_of_ref = expr_value.orig_var;
         let original_owner_of_ref_pos = envs.findIndex((env) =>
           env.vars.includes(original_owner_of_ref)
         );
+        console.log(original_owner_of_ref_pos);
+        console.log(envs.toString());
         if (vector_variable_env_pos < original_owner_of_ref_pos) {
           let vec_name = ctx.IDENTIFIER().getText();
           throw new Error(
-            `Cannot push ${expr_value} into ${vec_name} because the lifetime of ${vec_name} exceeds that of  ${expr_value}`
+            `Cannot push ${expr_value.toString()} into ${vec_name} because the lifetime of ${vec_name} exceeds that of  ${expr_value.toString()}`
           );
         }
         let vector = vector_variable.maybe_vector;
@@ -482,6 +490,7 @@ class RustEvaluatorVisitor
       }
     } else if (ctx.getChildCount() == 2) {
       if (ctx.getChild(0).getText() == "&") {
+        console.log("[visitExpression] &_");
         return {
           type: "immut_ref",
           name: ctx.getChild(1).getText(),
@@ -512,6 +521,8 @@ class RustEvaluatorVisitor
         return { type: "move_ownership", orig_var };
       } else if (ctx.NUMBER()) {
         return { type: "number", val: parseInt(ctx.NUMBER().getText(), 10) };
+      } else {
+        throw new Error("[Error] 94");
       }
     } else {
       console.log("[Error] 85");
