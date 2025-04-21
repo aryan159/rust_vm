@@ -18,9 +18,13 @@ parameter_list
     : parameter (',' parameter)*
     ;
 
+expression_list
+    : expression? (',' expression)*
+    ;
+
 // TODO: not sure how spacing works between ? and type
 parameter
-    : IDENTIFIER ':' 'mut'? '&'? type
+    : IDENTIFIER ':' '&'? 'mut'? type
     ;
 
 // TODO: currently returns 0 as default value, instead of ()
@@ -29,6 +33,9 @@ type
     | 'f64'
     | 'bool'
     | 'String'
+    | 'Vec' '<' type '>'
+    | '&' type
+    | '&mut' type
     ;
 
 statement
@@ -52,6 +59,11 @@ expression
     | '(' expression ')'
     | expression ('+' | '-') expression
     | IDENTIFIER '=' expression
+    | '&' IDENTIFIER
+    | '&mut' IDENTIFIER
+    | IDENTIFIER '(' expression_list ')'
+    | 'vec!' '[' expression_list ']'
+    | IDENTIFIER '.push' '(' expression ')'
     ;
 
 // Lexer rules

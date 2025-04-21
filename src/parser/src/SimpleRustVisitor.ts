@@ -7,6 +7,7 @@ import { ProgramContext } from "./SimpleRustParser.js";
 import { FunctionContext } from "./SimpleRustParser.js";
 import { BlockContext } from "./SimpleRustParser.js";
 import { Parameter_listContext } from "./SimpleRustParser.js";
+import { Expression_listContext } from "./SimpleRustParser.js";
 import { ParameterContext } from "./SimpleRustParser.js";
 import { TypeContext } from "./SimpleRustParser.js";
 import { StatementContext } from "./SimpleRustParser.js";
@@ -47,6 +48,12 @@ export class SimpleRustVisitor<Result> extends AbstractParseTreeVisitor<Result> 
      * @return the visitor result
      */
     visitParameter_list?: (ctx: Parameter_listContext) => Result;
+    /**
+     * Visit a parse tree produced by `SimpleRustParser.expression_list`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitExpression_list?: (ctx: Expression_listContext) => Result;
     /**
      * Visit a parse tree produced by `SimpleRustParser.parameter`.
      * @param ctx the parse tree
