@@ -235,7 +235,7 @@ class RustEvaluatorVisitor
 
     this.visitBlock(func_main.block);
 
-    return 62;
+    return 67;
   }
 
   visitFunction(ctx: FunctionContext): void {
@@ -268,7 +268,11 @@ class RustEvaluatorVisitor
 
   visitBlock(ctx: BlockContext): ExprResult {
     add_env_scope(envs);
-    let visitedStatements = ctx.statement().map((x) => this.visitStatement(x));
+    console.log("[visitBlock]");
+    let visitedStatements = [];
+    if (ctx.statement()) {
+      visitedStatements = ctx.statement().map((x) => this.visitStatement(x));
+    }
     remove_env_scope(envs);
 
     if (visitedStatements.length > 0) {
@@ -317,6 +321,10 @@ class RustEvaluatorVisitor
       } else {
         console.log(`[Error] 61. ${expr.vec.type}`);
       }
+    } else if (expr.type == "move_ownership") {
+      expr.orig_var.is_moved = true;
+      const new_variable = new Variable(var_name, is_mut);
+      envs[envs.length - 1].vars.push(new_variable);
     } else {
       console.log(`[Error] 24. ${expr.type}`);
     }
@@ -417,7 +425,7 @@ class RustEvaluatorVisitor
         }
 
         let args = ctx.expression_list().expression();
-        let visited_args = args.map((x) => this.visitExpression(x));
+        // let visited_args = args.map((x) => this.visitExpression(x));
 
         if (func.parameters.length !== args.length) {
           throw new Error(
@@ -426,22 +434,27 @@ class RustEvaluatorVisitor
         }
 
         add_env_scope(envs);
+        let variable_declarations_to_execute = [];
 
         for (let i = 0; i < func.parameters.length; i++) {
           let param = func.parameters[i];
-          let arg = visited_args[i];
-          if (param.type == "immut_ref" && arg.type == "immut_ref") {
-            // empty
-          } else if (param.type == "mut_ref" && arg.type == "mut_ref") {
-            // empty
-          } else if (param.type == "move" && arg.type == "move_ownership") {
-            move_ownership(envs, arg.orig_var, param.name);
+          let visited_arg = this.visitExpression(args[i]);
+          if (param.type == "immut_ref" && visited_arg.type == "immut_ref") {
+            visited_arg.reference.name = param.name;
+          } else if (param.type == "mut_ref" && visited_arg.type == "mut_ref") {
+            visited_arg.reference.name = param.name;
+          } else if (
+            param.type == "move" &&
+            visited_arg.type == "move_ownership"
+          ) {
+            move_ownership(envs, visited_arg.orig_var, param.name);
           } else {
             throw new Error(
-              `Parameter - Argument type mismatch. Expected: ${param.type}, but got: ${arg.type}`
+              `Parameter - Argument type mismatch. Expected: ${param.type}, but got: ${visited_arg.type}`
             );
           }
         }
+        this.visitBlock(func.block);
         remove_env_scope(envs);
       }
     } else if (ctx.getChildCount() == 3) {
@@ -498,7 +511,7 @@ class RustEvaluatorVisitor
           reference: new Reference(
             get_variable(envs, ctx.getChild(1).getText()),
             false,
-            ctx.getChild(1).getText()
+            "NOT_YET_NAMED"
           ),
         };
       } else if (ctx.getChild(0).getText() == "&mut") {
@@ -509,7 +522,7 @@ class RustEvaluatorVisitor
           reference: new Reference(
             get_variable(envs, ctx.getChild(1).getText()),
             true,
-            ctx.getChild(1).getText()
+            "NOT_YET_NAMED"
           ),
         };
       } else {
